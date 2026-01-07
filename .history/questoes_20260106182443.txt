@@ -1,0 +1,243 @@
+=== PRAKRITI ===
+1. Qual é a sua estrutura corporal natural?
+(V) Magra, ossuda, dificuldade em ganhar peso
+(P) Média, muscular, proporcional
+(K) Pesada, robusta, tendência a ganhar peso facilmente
+2. Como é a sua altura?
+(V) Muito alta ou muito baixa
+(P) Média
+(K) Baixa a média, com boa estrutura
+3. Como são suas articulações?
+(V) Pequenas, proeminentes, estalando facilmente
+(P) Médias, flexíveis
+(K) Grandes, bem lubrificadas, estáveis
+4. Como é a sua pele naturalmente?
+(V) Seca, áspera, fria ao toque
+(P) Macia, oleosa, quente, com tendência a vermelhidão
+(K) Espessa, oleosa, suave, fria e pálida
+5. Qual é a textura do seu cabelo?
+(V) Seco, crespo, quebradiço
+(P) Fino, liso, com tendência à calvície ou branqueamento precoce
+(K) Grosso, oleoso, brilhante, forte
+6. Como são suas unhas?
+(V) Secas, quebradiças, ásperas
+(P) Flexíveis, rosadas, brilhantes
+(K) Grossas, fortes, pálidas
+7. Como é o seu apetite?
+(V) Variável, irregular, às vezes esquece de comer
+(P) Forte, intenso, fica irritado se pular refeições
+(K) Constante mas moderado, pode pular refeições facilmente
+8. Como é a sua digestão?
+(V) Irregular, com gases e distensão abdominal
+(P) Forte, rápida, tendência a azia
+(K) Lenta, mas estável
+9. Como é o seu funcionamento intestinal?
+(V) Irregular, tendência à constipação e fezes secas
+(P) Regular, fezes soltas, 2-3 vezes ao dia
+(K) Regular, pesado, uma vez ao dia
+10. Qual é a sua preferência por bebidas?
+(V) Prefere bebidas quentes
+(P) Prefere bebidas frias
+(K) Gosta de ambas, mas consome com moderação
+11. Como é o seu padrão de sono?
+(V) Leve, interrompido, dificuldade para dormir
+(P) Moderado, profundo, mas de curta duração
+(K) Profundo, pesado, longo
+12. Quantas horas você precisa dormir para se sentir descansado?
+(V) Variável, mas geralmente tem dificuldade em descansar bem
+(P) 6-8 horas, acorda revigorado
+(K) 8-10 horas ou mais
+13. Como é o seu nível de energia ao longo do dia?
+(V) Rajadas de energia seguidas de fadiga
+(P) Energia moderada e constante
+(K) Energia lenta para começar, mas sustentada
+14. Como você reage ao frio?
+(V) Muito sensível, mãos e pés sempre frios
+(P) Tolera bem o frio
+(K) Tolera bem, mas prefere calor moderado
+15. Como você reage ao calor?
+(V) Gosta de calor
+(P) Não tolera bem, transpira facilmente
+(K) Tolera razoavelmente
+16. Como é a sua transpiração?
+(V) Mínima
+(P) Profusa, com odor forte
+(K) Moderada, sem odor forte
+17. Como é a sua mente?
+(V) Rápida, criativa, inquieta
+(P) Aguçada, focada, crítica
+(K) Calma, estável, lenta para processar
+18. Como é a sua memória?
+(V) Aprende rápido, esquece rápido
+(P) Memória aguçada e precisa
+(K) Aprende devagar, mas lembra por muito tempo
+19. Como você lida com o estresse?
+(V) Fica ansioso, preocupado
+(P) Fica irritado, frustrado
+(K) Fica retraído, deprimido
+20. Qual é a sua tendência emocional predominante?
+(V) Ansiedade, medo, insegurança
+(P) Raiva, ciúme, competitividade
+(K) Apego, letargia, complacência
+21. Como é a sua fala?
+(V) Rápida, às vezes sem sentido, fala muito
+(P) Clara, precisa, persuasiva
+(K) Lenta, melodiosa, poucas palavras
+22. Como você toma decisões?
+(V) Rapidamente, mas muda de ideia com frequência
+(P) Decisivamente, com confiança
+(K) Lentamente, após muita consideração
+23. Como é o seu nível de atividade física?
+(V) Muito ativo, inquieto, não para
+(P) Moderadamente ativo, gosta de competição
+(K) Sedentário, prefere atividades calmas
+24. Como você se move?
+(V) Rápido, irregular, agitado
+(P) Propositado, com objetivo claro
+(K) Lento, gracioso, relaxado
+25. Como você gasta dinheiro?
+(V) Impulsivamente, rapidamente
+(P) Em coisas de qualidade e luxo
+(K) Com cuidado, economiza bem
+26. Qual é o seu padrão de trabalho?
+(V) Faz várias coisas ao mesmo tempo, disperso
+(P) Focado, eficiente, gosta de liderar
+(K) Lento e metódico, perseverante
+27. Como são seus olhos?
+(V) Pequenos, ativos, secos
+(P) Penetrantes, médios, sensíveis à luz
+(K) Grandes, calmos, líquidos
+28. Como é a sua voz?
+(V) Fraca, rouca
+(P) Alta, aguda
+(K) Profunda, melodiosa
+29. Qual é a sua resistência a doenças?
+(V) Baixa, sistema imunológico variável
+(P) Média, propensa a inflamações e febre
+(K) Alta, resistente, mas doenças duram mais quando ocorrem
+30. Como você se relaciona com mudanças?
+(V) Adora mudanças, busca novidades constantemente
+(P) Aceita mudanças se forem lógicas e benéficas
+(K) Resiste a mudanças, prefere rotina e estabilidade
+
+=== VIKRITI ===
+1. Como estão seus fogachos/ondas de calor?
+(V) Ocasionais, com sensação de frio após
+(P) Intensos, frequentes, com transpiração abundante
+(K) Leves ou ausentes
+2. Como está seu sono atualmente?
+(V) Acordando frequentemente, dificuldade para voltar a dormir, insônia
+(P) Acordando com calor, sono agitado, sonhos intensos
+(K) Sono pesado, dificuldade para acordar, sonolência durante o dia
+3. Como está sua menstruação (se ainda menstrua) ou sintomas do climatério?
+(V) Irregular, fluxo variável, cólicas com dor aguda
+(P) Fluxo abundante, sensação de calor, irritabilidade intensa
+(K) Retenção de líquidos, inchaço, peso
+4. Como está seu estado emocional nos últimos meses?
+(V) Ansiedade, medo, preocupação excessiva, nervosismo
+(P) Irritabilidade, raiva, frustração, impaciência
+(K) Tristeza, letargia, apatia, sensação de estagnação
+5. Como está sua libido?
+(V) Variável, com períodos de desinteresse e ansiedade
+(P) Diminuída, com irritação ou frustração
+(K) Muito baixa, com desinteresse persistente
+6. Como está sua pele atualmente?
+(V) Muito seca, áspera, com fissuras ou descamação
+(P) Irritada, avermelhada, com manchas ou sensível
+(K) Oleosa, congestionada, poros dilatados
+7. Como está seu cabelo?
+(V) Seco, quebradiço, com queda aumentada
+(P) Oleoso na raiz, com embranquecimento precoce
+(K) Oleoso, pesado, crescimento lento
+8. Como estão suas unhas?
+(V) Quebradiças, secas, descamando
+(P) Avermelhadas, quentes ao toque
+(K) Grossas, oleosas, crescimento lento
+9. Como está seu apetite atualmente?
+(V) Irregular, às vezes esquece de comer, ansiedade afeta o apetite
+(P) Forte, fica irritada se não come, fome intensa
+(K) Reduzido, pode ficar muito tempo sem comer
+10. Como está sua digestão?
+(V) Irregular, gases, inchaço, sensação de leveza excessiva
+(P) Azia, queimação, evacuações soltas ou urgentes
+(K) Lenta, pesada, sensação de plenitude prolongada
+11. Como está seu funcionamento intestinal?
+(V) Constipação, fezes secas e duras, irregularidade
+(P) Solto, 2-3 vezes ao dia, às vezes com queimação
+(K) Lento, pesado, com muco
+12. Como está seu peso?
+(V) Perdeu peso ou dificuldade para ganhar
+(P) Mantém peso estável
+(K) Ganhou peso, especialmente no abdômen, dificuldade para perder
+13. Como está seu nível de energia?
+(V) Esgotada, fadiga extrema, exaustão nervosa
+(P) Energia moderada, mas queima rápido quando em atividade
+(K) Letargia, preguiça, falta de motivação
+14. Como está sua resistência física?
+(V) Muito baixa, cansa rapidamente
+(P) Moderada, mas recupera razoavelmente
+(K) Pesada, movimento lento, mas resiste quando em atividade
+15. Como você acorda pela manhã?
+(V) Acordada mas ansiosa, mente agitada
+(P) Relativamente bem, mas com calor
+(K) Com dificuldade, pesada, precisando de muito tempo
+16. Como está sua memória e concentração?
+(V) Esquecimento frequente, dificuldade de foco, mente dispersa
+(P) Focada, mas crítica demais consigo mesma
+(K) Lenta para processar, nebulosa, falta de clareza
+17. Como você tem reagido ao estresse?
+(V) Ansiedade intensa, pânico, preocupação excessiva
+(P) Irritação, explosões de raiva, frustração
+(K) Retraimento, isolamento, comer emocional
+18. Como está sua fala atualmente?
+(V) Rápida, ansiosa, às vezes sem nexo
+(P) Assertiva, crítica, cortante
+(K) Lenta, com pausas longas, falta de palavras
+19. Qual emoção predomina em você agora?
+(V) Medo, insegurança, ansiedade
+(P) Raiva, frustração, ressentimento
+(K) Tristeza, apego, depressão
+20. Como você tem sentido em relação à temperatura?
+(V) Mãos e pés frios, calafrios, mas com fogachos ocasionais
+(P) Muito calor, fogachos intensos, transpiração abundante
+(K) Sensação de frio e umidade, mas tolerável
+21. Como está sua transpiração?
+(V) Mínima, mesmo com fogachos
+(P) Excessiva, com odor forte, principalmente noturna
+(K) Moderada, pegajosa
+22. Você tem sentido dores articulares ou musculares?
+(V) Dores agudas, migratórias, com rigidez e estalos
+(P) Dores com sensação de queimação ou inflamação
+(K) Dores surdas, rigidez pela manhã, pesadez
+23. Como está sua região pélvica/vaginal?
+(V) Secura vaginal intensa, desconforto, dor
+(P) Sensação de calor, irritação, inflamação
+(K) Corrimento, umidade excessiva, peso
+24. Você tem tido dores de cabeça?
+(V) Tensionais, na região da nuca, variáveis
+(P) Enxaquecas intensas, com sensibilidade à luz
+(K) Peso na cabeça, sinus congestionado
+25. Como tem sido sua rotina alimentar?
+(V) Irregular, pula refeições, come rápido e em pé
+(P) Regular, não tolera atrasos nas refeições
+(K) Come por conforto emocional, belisca muito
+26. Como está sua prática de exercícios?
+(V) Muito agitada ou completamente parada, sem regularidade
+(P) Intensa quando faz, competitiva
+(K) Sedentária, evita movimento, resistência ao exercício
+27. Como você tem tomado decisões?
+(V) Com muita indecisão, mudando de ideia constantemente
+(P) Rapidamente, mas com irritação se contrariada
+(K) Procrastinando, evitando mudanças
+28. Você tem apresentado edemas (inchaço)?
+(V) Ocasional, principalmente nos tornozelos
+(P) Raramente
+(K) Frequente, generalizado, principalmente pernas e abdômen
+29. Como está sua imunidade?
+(V) Baixa, pega resfriados facilmente, recuperação lenta
+(P) Tendência a inflamações, infecções com febre
+(K) Congestão frequente, alergias, muco
+30. Qual sintoma tem mais incomodado você nesta fase?
+(V) Ansiedade, insônia, secura (pele, vaginal)
+(P) Fogachos intensos, irritabilidade, inflamações
+(K) Ganho de peso, letargia, depressão
