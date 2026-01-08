@@ -26,7 +26,15 @@ function Responder({ mode = 'public' }) {
           return api.get(`/questionarios/${res.data.questionario.id}`);
         })
         .then(res => {
-          setQuestionario(res.data);
+          console.log("DADOS RECEBIDOS:", res.data); // DEBUG
+          
+          let quest = res.data;
+          // Normalizar se vier HATEOAS
+          if (quest._embedded && quest._embedded.perguntas) {
+              quest.perguntas = quest._embedded.perguntas;
+          }
+          
+          setQuestionario(quest);
           setLoading(false);
         })
         .catch(err => {
@@ -42,7 +50,12 @@ function Responder({ mode = 'public' }) {
       // Modo legado/teste (sem token)
       api.get(`/questionarios/${id}`)
         .then(response => {
-           setQuestionario(response.data);
+           console.log("DADOS ID RECEBIDOS:", response.data); // DEBUG
+           let quest = response.data;
+           if (quest._embedded && quest._embedded.perguntas) {
+               quest.perguntas = quest._embedded.perguntas;
+           }
+           setQuestionario(quest);
            setLoading(false);
         })
         .catch(error => {
