@@ -16,8 +16,26 @@ function Admin() {
         return;
     }
 
-    api.get('/questionarios')
-      .then(res => setQuestionarios(res.data));
+    // Adiciona parâmetro de tamanho para garantir que o Data REST traga tudo (default é 20)
+    api.get('/questionarios?size=1000')
+      .then(res => {
+          let dados = res.data;
+          // Suporte a Spring Data REST (HATEOAS) caso o endpoint automático intercepte
+          if (dados._embedded && dados._embedded.questionarios) {
+              dados = dados._embedded.questionarios;
+          }
+          
+          if (Array.isArray(dados)) {
+            setQuestionarios(dados);
+          } else {
+             console.error("Formato inesperado:", res.data);
+             setQuestionarios([]);
+          }
+      })
+      .catch(err => {
+          console.error("Erro ao carregar questionários", err);
+          setQuestionarios([]);
+      });
   }, []);
 
   const handleGerarLink = async (e) => {
@@ -46,30 +64,42 @@ function Admin() {
   };
 
   const copiarLink = async () => {
+    // Tentar API moderna primeiro (Só funciona em HTTPS ou Localhost)
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+            await navigator.clipboard.writeText(linkGerado);
+            alert("Link copiado!");
+            return;
+        } catch (err) {
+            console.error('Erro ao usar clipboard API:', err);
+        }
+    }
+
+    // Fallback para HTTP (Contexto não seguro)
     try {
-      await navigator.clipboard.writeText(linkGerado);
-      alert("Link copiado!");
-    } catch (err) {
-      console.error('Erro ao usar clipboard API:', err);
-      // Fallback para navegadores antigos ou contexto não seguro (HTTP)
-      try {
         const textArea = document.createElement("textarea");
         textArea.value = linkGerado;
-        textArea.style.position = "fixed"; // Evitar scroll
+        
+        // Garantir que o elemento faça parte do DOM mas não atrapalhe o layout
+        textArea.style.position = "fixed";
+        textArea.style.left = "-9999px";
+        textArea.style.top = "0";
         document.body.appendChild(textArea);
+        
         textArea.focus();
         textArea.select();
+        
         const successful = document.execCommand('copy');
         document.body.removeChild(textArea);
+        
         if (successful) {
-          alert("Link copiado!");
+            alert("Link copiado (Modo HTTP)!");
         } else {
-          throw new Error("Comando copy falhou");
+            throw new Error("Comando copy falhou");
         }
-      } catch (err2) {
+    } catch (err2) {
         console.error('Fallback falhou:', err2);
-        alert("Não foi possível copiar automaticamente. Por favor, selecione o link e copie manualmente.");
-      }
+        prompt("Não foi possível copiar automaticamente (requer HTTPS). Copie o link abaixo manualmente:", linkGerado);
     }
   };
 

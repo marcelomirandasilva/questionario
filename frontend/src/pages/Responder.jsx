@@ -23,10 +23,18 @@ function Responder({ mode = 'public' }) {
         .then(res => {
           setConvite(res.data);
           // 2. Carregar Questionário associado ao convite
-          return api.get(`/questionarios/${res.data.questionario.id}`);
+          return api.get(`/questionarios/${res.data.questionario.id}?projection=completo`);
         })
         .then(res => {
-          setQuestionario(res.data);
+          console.log("DADOS RECEBIDOS:", res.data); // DEBUG
+          
+          let quest = res.data;
+          // Normalizar se vier HATEOAS
+          if (quest._embedded && quest._embedded.perguntas) {
+              quest.perguntas = quest._embedded.perguntas;
+          }
+          
+          setQuestionario(quest);
           setLoading(false);
         })
         .catch(err => {
@@ -40,9 +48,14 @@ function Responder({ mode = 'public' }) {
         });
     } else if (id) {
       // Modo legado/teste (sem token)
-      api.get(`/questionarios/${id}`)
+      api.get(`/questionarios/${id}?projection=completo`)
         .then(response => {
-           setQuestionario(response.data);
+           console.log("DADOS ID RECEBIDOS:", response.data); // DEBUG
+           let quest = response.data;
+           if (quest._embedded && quest._embedded.perguntas) {
+               quest.perguntas = quest._embedded.perguntas;
+           }
+           setQuestionario(quest);
            setLoading(false);
         })
         .catch(error => {
@@ -52,6 +65,7 @@ function Responder({ mode = 'public' }) {
         });
     }
   }, [id, token, mode]);
+  
 
   const handleSelectOption = (perguntaId, opcao) => {
     setRespostas(prev => ({
@@ -81,16 +95,21 @@ function Responder({ mode = 'public' }) {
     }
 
     // 2. Montar Payload
+    // 2. Montar Payload com Tipos Corretos
     const respostasMap = {};
     Object.keys(respostas).forEach(key => {
-        respostasMap[key] = respostas[key].id;
+        // Garantir que a chave (PerguntaId) e Valor (OpcaoId) sejam numéricos no JSON
+        // Nota: Em JS chaves de objeto são strings, mas o valor deve ser numérico
+        respostasMap[key] = parseInt(respostas[key].id); 
     });
 
     const payload = {
-        token: mode === 'token' ? token : null,
-        questionarioId: mode === 'public' ? id : null,
+        token: (mode === 'token' && token) ? token : null,
+        questionarioId: (mode === 'public' && id) ? parseInt(id) : null,
         respostas: respostasMap
     };
+    
+    console.log("Enviando Payload para /tentativas:", payload); // DEBUG
 
     setLoading(true);
 
@@ -125,7 +144,22 @@ function Responder({ mode = 'public' }) {
 
   if (!questionario) return null;
 
+  // Proteção contra questionário sem perguntas
+  if (!questionario.perguntas || questionario.perguntas.length === 0) {
+      return (
+          <div className="container">
+              <div className="card">
+                  <h3>Este questionário ainda não possui perguntas cadastradas.</h3>
+                  <button className="btn-secondary" onClick={() => navigate('/')}>Voltar</button>
+              </div>
+          </div>
+      );
+  }
+
   const perguntaAtual = questionario.perguntas[indiceAtual];
+  // Proteção adicional caso o índice saia do range (embora improvável com a lógica atual)
+  if (!perguntaAtual) return <div>Erro ao carregar pergunta.</div>;
+
   const progresso = ((indiceAtual + 1) / questionario.perguntas.length) * 100;
   const isUltima = indiceAtual === questionario.perguntas.length - 1;
   const respondeuAtual = !!respostas[perguntaAtual.id];
@@ -151,7 +185,7 @@ function Responder({ mode = 'public' }) {
         <div className="card fade-in" key={perguntaAtual.id} style={{marginBottom: '1.5rem'}}>
             <h3>{indiceAtual + 1}. {perguntaAtual.texto}</h3>
             <div className="opcoes-list">
-                {perguntaAtual.opcoes.map(opcao => {
+                {perguntaAtual.opcoes?.map(opcao => {
                     const isSelected = respostas[perguntaAtual.id]?.id === opcao.id;
                     return (
                         <div 
