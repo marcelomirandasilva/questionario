@@ -1,0 +1,82 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - main  # Ou 'master', dependendo da sua branch principal
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Baixa o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2. Configura o Java 17 (igual ao passo 3.2 do seu doc)
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # 3. Build do Backend (Spring Boot)
+      - name: Build Backend
+        run: |
+          cd api
+          chmod +x mvnw
+          ./mvnw -DskipTests clean package
+
+      # 4. Configura Node.js 20 (igual ao passo 3.3 do seu doc)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # 5. Build do Frontend (React)
+      - name: Build Frontend
+        run: |
+          cd frontend
+          npm install
+          npm run build
+
+      # 6. Copia os arquivos para a EC2 via SCP
+      - name: Copy files to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "api/target/*.jar,frontend/dist/"
+          target: "/home/ubuntu/deploy-temp" # Pasta temporária na EC2
+
+      # 7. Executa comandos na EC2 para atualizar a aplicação
+      - name: Execute Remote SSH Commands
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "Iniciando atualização..."
+
+            # Parar o serviço do Backend (Passo 6 do seu doc)
+            sudo systemctl stop questionario
+
+            # Mover o JAR novo para o local correto (/opt/questionario)
+            # Nota: O scp mantém a estrutura de pastas, por isso o caminho api/target/
+            sudo cp /home/ubuntu/deploy-temp/api/target/*.jar /opt/questionario/app.jar
+            
+            # Atualizar o Frontend (Nginx root)
+            # Remove o antigo e coloca o novo
+            sudo rm -rf /home/ubuntu/apps/questionario/frontend/dist/*
+            sudo cp -r /home/ubuntu/deploy-temp/frontend/dist/* /home/ubuntu/apps/questionario/frontend/dist/
+
+            # Reiniciar o serviço Backend
+            sudo systemctl start questionario
+            
+            # Limpar arquivos temporários
+            rm -rf /home/ubuntu/deploy-temp
+
+            echo "Deploy finalizado com sucesso!"

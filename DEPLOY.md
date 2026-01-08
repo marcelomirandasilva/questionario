@@ -35,13 +35,31 @@ Este guia descreve o processo de publicação (deploy) da aplicação "Question�
 
 ## 3. Preparação do Banco de Dados
 
-*Recomendação: Para produção, use AWS RDS. Para este guia, usaremos um banco local ou H2 (se configurado).*
-
-Se precisar de PostgreSQL local na EC2:
-```bash
-sudo apt install postgresql postgresql-contrib -y
-# Configurar senha e banco conforme seu application.properties
-```
+*Recomendação: Para produção, use AWS RDS. Para este guia, usaremos MySQL local na própria EC2.*
+ 
+ 1.  **Instalar MySQL Server**:
+     ```bash
+     sudo apt install mysql-server -y
+     ```
+ 
+ 2.  **Configurar Banco e Usuário**:
+     Acesse o MySQL como root (sudo):
+     ```bash
+     sudo mysql
+     ```
+     Execute os comandos SQL abaixo (substitua `SuaSenhaSegura` por uma senha real):
+     ```sql
+     -- Criar banco
+     CREATE DATABASE questionario_db;
+ 
+     -- Criar usuário para a aplicação
+     CREATE USER 'app_questionario'@'localhost' IDENTIFIED BY 'SuaSenhaSegura';
+ 
+     -- Dar permissões
+     GRANT ALL PRIVILEGES ON questionario_db.* TO 'app_questionario'@'localhost';
+     FLUSH PRIVILEGES;
+     EXIT;
+     ```
 
 ---
 
@@ -76,6 +94,9 @@ sudo apt install postgresql postgresql-contrib -y
 
     [Service]
     User=ubuntu
+    Environment="DB_USERNAME=app_questionario"
+    Environment="DB_PASSWORD=SuaSenhaSegura"
+    # Environment="DB_URL=..." # Opcional se for diferente do default
     ExecStart=/usr/bin/java -jar /opt/questionario-api/app.jar
     SuccessExitStatus=143
     Restart=always
