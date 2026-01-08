@@ -34,5 +34,9 @@ public class RestConfiguration implements RepositoryRestConfigurer {
         cors.addMapping("/**")
             .allowedOrigins("*")
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+            
+        // Registrar Projeção manualmente
+        config.getProjectionConfiguration()
+              .addProjection(com.mmiranda.questionario.projection.QuestionarioCompleto.class);
     }
 }
