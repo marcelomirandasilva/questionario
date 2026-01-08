@@ -95,16 +95,21 @@ function Responder({ mode = 'public' }) {
     }
 
     // 2. Montar Payload
+    // 2. Montar Payload com Tipos Corretos
     const respostasMap = {};
     Object.keys(respostas).forEach(key => {
-        respostasMap[key] = respostas[key].id;
+        // Garantir que a chave (PerguntaId) e Valor (OpcaoId) sejam numéricos no JSON
+        // Nota: Em JS chaves de objeto são strings, mas o valor deve ser numérico
+        respostasMap[key] = parseInt(respostas[key].id); 
     });
 
     const payload = {
-        token: mode === 'token' ? token : null,
-        questionarioId: mode === 'public' ? id : null,
+        token: (mode === 'token' && token) ? token : null,
+        questionarioId: (mode === 'public' && id) ? parseInt(id) : null,
         respostas: respostasMap
     };
+    
+    console.log("Enviando Payload para /tentativas:", payload); // DEBUG
 
     setLoading(true);
 
