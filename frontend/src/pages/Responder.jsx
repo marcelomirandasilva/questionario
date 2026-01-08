@@ -52,6 +52,7 @@ function Responder({ mode = 'public' }) {
         });
     }
   }, [id, token, mode]);
+  
 
   const handleSelectOption = (perguntaId, opcao) => {
     setRespostas(prev => ({
