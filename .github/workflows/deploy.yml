@@ -59,24 +59,55 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            echo "Iniciando atualização..."
+            echo "=== INICIANDO DEBUG ==="
+            
+            # 1. Ver o que chegou na pasta temporária
+            echo "Listando arquivos que chegaram via SCP:"
+            ls -R /home/ubuntu/deploy-temp
+            
+            echo "---------------------------------"
+            
+            # 2. Ver data dos arquivos atuais do site (antes de apagar)
+            echo "Data dos arquivos atuais no Nginx:"
+            ls -l /home/ubuntu/apps/questionario/frontend/dist/index.html || echo "Arquivo index.html não encontrado no destino!"
 
-            # Parar o serviço do Backend (Passo 6 do seu doc)
+            echo "---------------------------------"
+            echo "Atualizando arquivos..."
+
+            # 3. Parar Backend
             sudo systemctl stop questionario
 
-            # Mover o JAR novo para o local correto (/opt/questionario)
-            # Nota: O scp mantém a estrutura de pastas, por isso o caminho api/target/
-            sudo cp /home/ubuntu/deploy-temp/api/target/*.jar /opt/questionario/app.jar
+            # 4. Atualizar Backend (JAR)
+            # O '||' garante que vejamos o erro se falhar, mas não trava o script de imediato no debug
+            sudo cp /home/ubuntu/deploy-temp/api/target/*.jar /opt/questionario/app.jar || echo "ERRO AO COPIAR JAR"
+
+            # 5. Atualizar Frontend
+            # ATENÇÃO: Aqui vamos tentar identificar a pasta correta dinamicamente
             
-            # Atualizar o Frontend (Nginx root)
-            # Remove o antigo e coloca o novo
+            # Limpa a pasta destino
             sudo rm -rf /home/ubuntu/apps/questionario/frontend/dist/*
-            sudo cp -r /home/ubuntu/deploy-temp/frontend/dist/* /home/ubuntu/apps/questionario/frontend/dist/
-
-            # Reiniciar o serviço Backend
-            sudo systemctl start questionario
             
-            # Limpar arquivos temporários
-            rm -rf /home/ubuntu/deploy-temp
+            # Tenta copiar. Se a estrutura for deploy-temp/frontend/dist
+            if [ -d "/home/ubuntu/deploy-temp/frontend/dist" ]; then
+                sudo cp -r /home/ubuntu/deploy-temp/frontend/dist/* /home/ubuntu/apps/questionario/frontend/dist/
+                echo "Cópia feita de deploy-temp/frontend/dist"
+            
+            # Se a estrutura for deploy-temp/dist (sem a pasta frontend)
+            elif [ -d "/home/ubuntu/deploy-temp/dist" ]; then
+                sudo cp -r /home/ubuntu/deploy-temp/dist/* /home/ubuntu/apps/questionario/frontend/dist/
+                echo "Cópia feita de deploy-temp/dist (caminho curto)"
+            
+            else
+                echo "ERRO CRÍTICO: Não encontrei a pasta dist dentro de deploy-temp!"
+                ls -R /home/ubuntu/deploy-temp
+            fi
 
-            echo "Deploy finalizado com sucesso!"
+            # 6. Reiniciar serviços
+            sudo systemctl start questionario
+            # Força o Nginx a reler (útil para caches teimosos)
+            sudo systemctl reload nginx
+            
+            # 7. Limpeza
+            rm -rf /home/ubuntu/deploy-temp
+            
+            echo "=== FIM DO DEPLOY ==="
