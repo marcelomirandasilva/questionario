@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/convites")
+@RequestMapping("/api/convites")
 public class ConviteController {
 
     private final ConviteRepository conviteRepository;
