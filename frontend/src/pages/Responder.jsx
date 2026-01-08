@@ -23,7 +23,7 @@ function Responder({ mode = 'public' }) {
         .then(res => {
           setConvite(res.data);
           // 2. Carregar Questionário associado ao convite
-          return api.get(`/questionarios/${res.data.questionario.id}`);
+          return api.get(`/questionarios/${res.data.questionario.id}?projection=completo`);
         })
         .then(res => {
           console.log("DADOS RECEBIDOS:", res.data); // DEBUG
@@ -48,7 +48,7 @@ function Responder({ mode = 'public' }) {
         });
     } else if (id) {
       // Modo legado/teste (sem token)
-      api.get(`/questionarios/${id}`)
+      api.get(`/questionarios/${id}?projection=completo`)
         .then(response => {
            console.log("DADOS ID RECEBIDOS:", response.data); // DEBUG
            let quest = response.data;
