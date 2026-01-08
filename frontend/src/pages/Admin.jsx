@@ -16,10 +16,17 @@ function Admin() {
         return;
     }
 
-    api.get('/questionarios')
+    // Adiciona parâmetro de tamanho para garantir que o Data REST traga tudo (default é 20)
+    api.get('/questionarios?size=1000')
       .then(res => {
-          if (Array.isArray(res.data)) {
-            setQuestionarios(res.data);
+          let dados = res.data;
+          // Suporte a Spring Data REST (HATEOAS) caso o endpoint automático intercepte
+          if (dados._embedded && dados._embedded.questionarios) {
+              dados = dados._embedded.questionarios;
+          }
+          
+          if (Array.isArray(dados)) {
+            setQuestionarios(dados);
           } else {
              console.error("Formato inesperado:", res.data);
              setQuestionarios([]);

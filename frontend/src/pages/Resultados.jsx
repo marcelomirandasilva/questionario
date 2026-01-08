@@ -14,9 +14,21 @@ function Resultados() {
 
   const carregarTentativas = async () => {
     try {
-      const res = await api.get('/tentativas');
+      const res = await api.get('/tentativas?size=1000');
+      let dados = res.data;
+      
+      // Suporte a Spring Data REST (HATEOAS)
+      if (dados._embedded && dados._embedded.tentativas) {
+           dados = dados._embedded.tentativas;
+      }
+      
+      if (!Array.isArray(dados)) {
+          console.error("Formato inesperado em tentativas:", dados);
+          dados = [];
+      }
+
       // Ordenar por data decrescente (assumindo que o ID reflete a ordem, ou poderia ordenar por date string)
-      const sorted = res.data.sort((a, b) => b.id - a.id);
+      const sorted = dados.sort((a, b) => b.id - a.id);
       setTentativas(sorted);
       setLoading(false);
     } catch (error) {
