@@ -151,7 +151,7 @@ function Responder({ mode = 'public' }) {
         <div className="card fade-in" key={perguntaAtual.id} style={{marginBottom: '1.5rem'}}>
             <h3>{indiceAtual + 1}. {perguntaAtual.texto}</h3>
             <div className="opcoes-list">
-                {perguntaAtual.opcoes.map(opcao => {
+                {perguntaAtual.opcoes?.map(opcao => {
                     const isSelected = respostas[perguntaAtual.id]?.id === opcao.id;
                     return (
                         <div 

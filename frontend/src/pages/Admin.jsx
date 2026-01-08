@@ -17,7 +17,18 @@ function Admin() {
     }
 
     api.get('/questionarios')
-      .then(res => setQuestionarios(res.data));
+      .then(res => {
+          if (Array.isArray(res.data)) {
+            setQuestionarios(res.data);
+          } else {
+             console.error("Formato inesperado:", res.data);
+             setQuestionarios([]);
+          }
+      })
+      .catch(err => {
+          console.error("Erro ao carregar questionários", err);
+          setQuestionarios([]);
+      });
   }, []);
 
   const handleGerarLink = async (e) => {
