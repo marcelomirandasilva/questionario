@@ -126,7 +126,22 @@ function Responder({ mode = 'public' }) {
 
   if (!questionario) return null;
 
+  // Proteção contra questionário sem perguntas
+  if (!questionario.perguntas || questionario.perguntas.length === 0) {
+      return (
+          <div className="container">
+              <div className="card">
+                  <h3>Este questionário ainda não possui perguntas cadastradas.</h3>
+                  <button className="btn-secondary" onClick={() => navigate('/')}>Voltar</button>
+              </div>
+          </div>
+      );
+  }
+
   const perguntaAtual = questionario.perguntas[indiceAtual];
+  // Proteção adicional caso o índice saia do range (embora improvável com a lógica atual)
+  if (!perguntaAtual) return <div>Erro ao carregar pergunta.</div>;
+
   const progresso = ((indiceAtual + 1) / questionario.perguntas.length) * 100;
   const isUltima = indiceAtual === questionario.perguntas.length - 1;
   const respondeuAtual = !!respostas[perguntaAtual.id];

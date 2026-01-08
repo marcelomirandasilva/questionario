@@ -17,7 +17,7 @@ public class Questionario {
 
     private Boolean ativo = true;
 
-    @OneToMany(mappedBy = "questionario", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "questionario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Pergunta> perguntas;
 
     public Long getId() {
