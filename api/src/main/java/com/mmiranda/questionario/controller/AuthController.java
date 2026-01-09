@@ -12,9 +12,11 @@ import java.util.Map;
 public class AuthController {
 
     private final UsuarioRepository usuarioRepository;
+    private final org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
-    public AuthController(UsuarioRepository usuarioRepository) {
+    public AuthController(UsuarioRepository usuarioRepository, org.springframework.security.crypto.password.PasswordEncoder passwordEncoder) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping("/login")
@@ -24,11 +26,11 @@ public class AuthController {
 
         return usuarioRepository.findByUsername(username)
                 .map(u -> {
-                    if (u.getPassword().equals(password)) {
+                    // Verifica se a senha bate (usando BCrypt)
+                    if (passwordEncoder.matches(password, u.getPassword())) {
                         return ResponseEntity.ok(Map.of(
                             "message", "Login realizado com sucesso",
                             "user", u.getUsername()
-                            // Em produção, aqui retornaria um Token JWT
                         ));
                     } else {
                         return ResponseEntity.status(401).body("Senha incorreta");
